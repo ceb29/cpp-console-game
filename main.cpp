@@ -38,8 +38,7 @@ int main(void)
                 char_buffer_ind++;
             }
         }
-        WriteConsoleOutputCharacter(
-            h_screen_buffer, char_buffer, screen_mult, buffer_coord, &buffer_data);
+        WriteConsoleOutputCharacter(h_screen_buffer, char_buffer, screen_mult, buffer_coord, &buffer_data);
     }
     return 0;
 }
