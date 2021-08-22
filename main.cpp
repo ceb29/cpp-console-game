@@ -1,42 +1,44 @@
 #include <windows.h>
 #include <iostream>
-//include <stdio.h>
+
+void screen_border(wchar_t*, int, int, int);
 
 int main(void)
 {
+    //variables for console screen buffer
     const int screen_width = 120;
     const int screen_height = 30;
     const int screen_mult = screen_width * screen_height;
     HANDLE h_screen_buffer;
-    DWORD D_test = 0;
+    DWORD buffer_data = 0;
     wchar_t char_buffer[screen_mult];
-    COORD Buf_Coord = { 0, 0};
-    wchar_t char_border = '-';
+    COORD buffer_coord = { 0, 0 };
 
-    for (int i = 0; i < screen_mult; i++) {
-        if (i < screen_width || i % screen_width == 0 || i % screen_width == screen_width - 1) {
-            char_buffer[i] = char_border;
-        }
-        else if (i < screen_mult - screen_width){
-            char_buffer[i] = ' ';
-        }
-        else {
-            char_buffer[i] = char_border;
-        }
-    }
-
+    //setup console screen buffer
+    screen_border(char_buffer, screen_width, screen_height, screen_mult);
     h_screen_buffer = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
-
     SetConsoleActiveScreenBuffer(h_screen_buffer);
+    WriteConsoleOutputCharacter(h_screen_buffer, char_buffer, screen_mult, buffer_coord, &buffer_data);
 
-    WriteConsoleOutputCharacter(
-        h_screen_buffer, char_buffer, screen_mult, Buf_Coord, &D_test);
-
+    //start main loop (exit if esc key is pressed)
     while (GetAsyncKeyState(VK_ESCAPE) == 0) {
         WriteConsoleOutputCharacter(
-            h_screen_buffer, char_buffer, screen_mult, Buf_Coord, &D_test);
-
+            h_screen_buffer, char_buffer, screen_mult, buffer_coord, &buffer_data);
     }
-
     return 0;
+}
+
+void screen_border(wchar_t* char_buff, int width, int height, int mult) {
+    wchar_t char_border = '-';
+    for (int i = 0; i < mult; i++) {
+        if (i < width || i % width == 0 || i % width == width - 1) {
+            char_buff[i] = char_border;
+        }
+        else if (i < mult - width) {
+            char_buff[i] = ' ';
+        }
+        else {
+            char_buff[i] = char_border;
+        }
+    }
 }
