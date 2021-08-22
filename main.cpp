@@ -7,7 +7,7 @@ void screen_border(wchar_t*, int, int, int);
 int main(void)
 {
     //variables for game clock
-    unsigned long long int seconds = 0;
+    unsigned long long int millis = 0;
     clock_t timer;
     float clock_millis;
     //variables for console screen buffer
@@ -18,7 +18,7 @@ int main(void)
     DWORD buffer_data = 0;
     wchar_t char_buffer[screen_mult];
     COORD buffer_coord = { 0, 0 };
-    int char_buffer_ind = 122;
+    int char_buffer_ind = 121;
     //setup console screen buffer
     screen_border(char_buffer, screen_width, screen_height, screen_mult);
     h_screen_buffer = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
@@ -28,11 +28,13 @@ int main(void)
     //start main loop (exit if esc key is pressed)
     while (GetAsyncKeyState(VK_ESCAPE) == 0) {
         clock_millis = ((float)(clock() - timer)) / CLOCKS_PER_SEC;
-        if (clock_millis >= 1) {
+        if (clock_millis >= 0.001) {
             timer = clock();
-            seconds++;
-            char_buffer[char_buffer_ind] = 'x';
-            if (char_buffer_ind > screen_width - screen_height) {
+            millis++;
+            if (char_buffer[char_buffer_ind] != '-') {
+                char_buffer[char_buffer_ind] = 'x';
+            }
+            if (char_buffer_ind < screen_mult) {
                 char_buffer_ind++;
             }
         }
