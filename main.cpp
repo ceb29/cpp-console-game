@@ -27,8 +27,6 @@ int main(void)
     int toggle = 0;
     int move_speed = 1;
     coord move_coord = create_coord(move_speed, move_speed);
-    move_coord.x = move_speed;
-    move_coord.y = move_speed;
     //start main loop (exit if esc key is pressed)
     while (GetAsyncKeyState(VK_ESCAPE) == 0) {
         game_clock.update_time();
