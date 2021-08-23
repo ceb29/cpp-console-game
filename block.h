@@ -21,4 +21,4 @@ public:
     rect_coord move_block(int, int);
 };
 
-rect_coord create_rect(int x_start, int x_end, int y_start, int y_end);
+rect_coord create_rect(int, int, int, int);
