@@ -1,8 +1,8 @@
 #include <windows.h>
 #include "game_timer.h"
 
-const int screen_width = 120;
-const int screen_height = 30;
+const int screen_width = 750;
+const int screen_height = 200;
 const int screen_mult = screen_width * screen_height;
 
 class Screen {
@@ -21,6 +21,9 @@ public:
     void border(void);
     void start(void);
     void write(void);
+    CONSOLE_FONT_INFOEX get_font(void);
+    void set_font(void);
+    void set_size(void);
     void test1(Game_Time);
     void test2(Game_Time);
 };

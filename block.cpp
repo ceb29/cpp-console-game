@@ -11,10 +11,8 @@ void Block::draw_block(void) {
     int x = block.x_end_coord - block.x_start_coord;
     int y = block.y_end_coord - block.y_start_coord;
     for (int i = 0; i < y; i++) {
-        for (int j = 0; j < x; j++) {
-            COORD color_cood = { block.x_start_coord + j, block.y_start_coord + i };
-            WriteConsoleOutputAttribute(screen_buffer, &attributes, 1, color_cood, &buff_data);
-        }
+        COORD color_coord = { block.x_start_coord, block.y_start_coord + i};
+        FillConsoleOutputAttribute(screen_buffer, attributes, x, color_coord, &buff_data);
     }
 }
 
@@ -45,4 +43,11 @@ rect_coord create_rect(int x_start, int x_end, int y_start, int y_end) {
     block.y_start_coord = y_start;
     block.y_end_coord = y_end;
     return block;
+}
+
+coord create_coord(int x, int y) {
+    coord coordinate;
+    coordinate.x = x;
+    coordinate.y = y;
+    return coordinate;
 }

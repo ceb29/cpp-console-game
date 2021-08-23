@@ -7,6 +7,11 @@ struct rect_coord {
     int y_end_coord;
 };
 
+struct coord {
+    int x;
+    int y;
+};
+
 class Block {
     HANDLE screen_buffer;
     rect_coord block;
@@ -22,3 +27,4 @@ public:
 };
 
 rect_coord create_rect(int, int, int, int);
+coord create_coord(int, int);

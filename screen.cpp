@@ -39,6 +39,8 @@ void Screen::start(void) {
     SetConsoleActiveScreenBuffer(h_screen_buffer);
     SetConsoleCursorInfo(h_screen_buffer, &cursor_info); //remove cursor
     WriteConsoleOutputCharacter(h_screen_buffer, char_buffer, screen_mult, buffer_coord, &buffer_data);
+    set_font();
+    set_size();
 }
 
 void Screen::write(void) {
@@ -84,4 +86,31 @@ void Screen::test2(Game_Time g_time) {
             }
         }
     }
+}
+
+CONSOLE_FONT_INFOEX Screen::get_font(void) {
+    CONSOLE_FONT_INFOEX text_1;
+    text_1.cbSize = sizeof(CONSOLE_FONT_INFOEX);
+    GetCurrentConsoleFontEx(h_screen_buffer, TRUE, &text_1);
+    return text_1;
+}
+
+void Screen::set_font(void) {
+    CONSOLE_FONT_INFOEX text;
+    text = get_font();
+    int x = text.dwFontSize.X / 10;
+    int y = text.dwFontSize.Y / 10;
+    text.dwFontSize.X = x;
+    text.dwFontSize.Y = y;
+    SetCurrentConsoleFontEx(h_screen_buffer, TRUE, &text);
+}
+
+void Screen::set_size(void) {
+    SMALL_RECT a;
+    a.Left = 0;
+    a.Right = screen_width-1;
+    a.Top = 0;
+    a.Bottom = screen_height-1;
+    SetConsoleScreenBufferSize(h_screen_buffer, {screen_width, screen_height});
+    SetConsoleWindowInfo(h_screen_buffer, TRUE, &a);
 }
