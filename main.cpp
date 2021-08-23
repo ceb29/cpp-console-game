@@ -1,5 +1,6 @@
 #include <iostream>
 #include "screen.h"
+#include "block.h"
 
 int main(void)
 {
@@ -11,10 +12,10 @@ int main(void)
     unsigned long long past_time = game_clock.get_millis();
     int fps = 10;
     int delay = 1000/fps;
-    rect_coord rect1 = create_block(10, 12, 5, 6);
-    rect_coord rect2;
+    rect_coord rect1 = create_rect(10, 12, 5, 6);
+    Block block1(rect1, screen.get_handle());
     screen.write();
-    screen.set_block(rect1);
+    block1.set_block();
     int toggle = 0;
     //start main loop (exit if esc key is pressed)
     while (GetAsyncKeyState(VK_ESCAPE) == 0) {
@@ -24,7 +25,7 @@ int main(void)
                 toggle++;
             }
             else {
-                rect1 = screen.move_block(rect1, 2, 1);
+                rect1 = block1.move_block(2, 1);
                 toggle = 0;
             }
             past_time = game_clock.get_millis();
