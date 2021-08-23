@@ -1,27 +1,26 @@
+#include <windows.h>
 #include "game_timer.h"
 
-//functions for Game_Time
-Game_Time::Game_Time(clock_t time) {
-    millis = 0;
-    timer = time;
-    clock_millis = 1.0;
-}
+const int screen_width = 120;
+const int screen_height = 30;
+const int screen_mult = screen_width * screen_height;
 
-unsigned long long int Game_Time::get_millis(void) {
-    return millis;
-}
-
-void Game_Time::clear_millis(void) {
-    if (millis > 10000) {
-        millis = 0;
-    }
-}
-
-void Game_Time::update_time(void) {
-    clock_millis = ((float)(clock() - timer)) / CLOCKS_PER_SEC;
-    if (clock_millis >= 0.001) {
-        timer = clock();
-        millis++;
-    }
-    clear_millis();
-}
+class Screen {
+    HANDLE h_screen_buffer;
+    DWORD buffer_data;
+    wchar_t* char_buffer;
+    COORD buffer_coord;
+    int buff_ind;
+    int index_plus;
+    CONSOLE_CURSOR_INFO cursor_info;
+    
+public:
+    Screen(void);
+    ~Screen(void);
+    HANDLE get_handle(void);
+    void border(void);
+    void start(void);
+    void write(void);
+    void test1(Game_Time);
+    void test2(Game_Time);
+};
