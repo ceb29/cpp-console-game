@@ -30,10 +30,10 @@ void Block::clear_block(void) {
 
 rect_coord Block::move_block(int x_speed, int y_speed) {
     clear_block();
-    block.x_start_coord += 2;
-    block.x_end_coord += 2;
-    block.y_start_coord += 1;
-    block.y_end_coord += 1;
+    block.x_start_coord += x_speed*2;
+    block.x_end_coord += x_speed*2;
+    block.y_start_coord += y_speed;
+    block.y_end_coord += y_speed;
     set_block();
     return block;
 }

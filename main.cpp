@@ -12,7 +12,7 @@ int main(void)
     unsigned long long past_time = game_clock.get_millis();
     int fps = 10;
     int delay = 1000/fps;
-    rect_coord rect1 = create_rect(10, 12, 5, 6);
+    rect_coord rect1 = create_rect(1, 3, 1, 2);
     Block block1(rect1, screen.get_handle());
     screen.write();
     block1.set_block();
@@ -25,7 +25,7 @@ int main(void)
                 toggle++;
             }
             else {
-                rect1 = block1.move_block(2, 1);
+                rect1 = block1.move_block(1, 1);
                 toggle = 0;
             }
             past_time = game_clock.get_millis();
@@ -49,4 +49,3 @@ int main(void)
             screen.test1;
             screen.write();
         */
-
