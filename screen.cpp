@@ -91,18 +91,18 @@ void Screen::test2(Game_Time g_time) {
 CONSOLE_FONT_INFOEX Screen::get_font(void) {
     CONSOLE_FONT_INFOEX text_1;
     text_1.cbSize = sizeof(CONSOLE_FONT_INFOEX);
-    GetCurrentConsoleFontEx(h_screen_buffer, TRUE, &text_1);
+    GetCurrentConsoleFontEx(h_screen_buffer, FALSE, &text_1);
     return text_1;
 }
 
 void Screen::set_font(void) {
     CONSOLE_FONT_INFOEX text;
     text = get_font();
-    int x = text.dwFontSize.X / 10;
-    int y = text.dwFontSize.Y / 10;
-    text.dwFontSize.X = x;
-    text.dwFontSize.Y = y;
-    SetCurrentConsoleFontEx(h_screen_buffer, TRUE, &text);
+    int x = text.dwFontSize.X;
+    int y = text.dwFontSize.Y;
+    text.dwFontSize.X = fontx;
+    text.dwFontSize.Y = fonty;
+    SetCurrentConsoleFontEx(h_screen_buffer, FALSE, &text);
 }
 
 void Screen::set_size(void) {

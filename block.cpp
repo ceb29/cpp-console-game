@@ -31,7 +31,7 @@ void Block::draw_block(void) {
 }
 
 void Block::set_block(void) {
-    attributes = FOREGROUND_BLUE | BACKGROUND_RED;
+    attributes = BACKGROUND_RED;
     draw_block();
 }
 
@@ -47,6 +47,41 @@ void Block::move_block(void) {
     block.y_start_coord += move_coord.y;
     block.y_end_coord += move_coord.y;
     set_block();
+}
+
+void Block::move_pixels(void) {
+    //
+    //testing out only rewriting borders, will need to account for different directions
+    //
+    int x = block.x_end_coord - block.x_start_coord;
+    int y = block.y_end_coord - block.y_start_coord;
+
+    //clear
+    attributes = FOREGROUND_BLUE;
+    COORD color_coord = { block.x_start_coord, block.y_start_coord};
+    FillConsoleOutputAttribute(screen_buffer, attributes, x, color_coord, &buff_data);
+    for (int i = 0; i < y; i++) {
+        color_coord.Y = block.y_start_coord + i;
+        FillConsoleOutputAttribute(screen_buffer, attributes, 1, color_coord, &buff_data);
+    }
+    
+    //draw
+    attributes = BACKGROUND_RED;
+    color_coord.X = block.x_start_coord+1;
+    color_coord.Y = block.y_end_coord;
+    FillConsoleOutputAttribute(screen_buffer, attributes, x, color_coord, &buff_data);
+    color_coord.X = block.x_end_coord;
+    color_coord.Y = block.y_start_coord + 1;
+    int z = color_coord.Y;
+    for (int i = 0; i < y; i++) {
+        color_coord.Y = z + i;
+        FillConsoleOutputAttribute(screen_buffer, attributes, 1, color_coord, &buff_data);
+    }
+
+    block.x_start_coord = block.x_start_coord + 1;
+    block.x_end_coord = block.x_end_coord + 1;
+    block.y_start_coord = block.y_start_coord + 1;
+    block.y_end_coord = block.y_end_coord + 1;
 }
 
 void Block::wall_bounce(void) {

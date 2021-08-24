@@ -31,6 +31,7 @@ public:
     void set_block(void);
     void clear_block(void);
     void move_block(void);
+    void move_pixels(void);
     void wall_bounce(void);
 };
 
