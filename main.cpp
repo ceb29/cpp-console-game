@@ -1,6 +1,7 @@
 #include <iostream>
 #include "screen.h"
 #include "block.h"
+
 rect_coord get_rect_cord(int width, int length, coord center);
 
 int fps = 60;
