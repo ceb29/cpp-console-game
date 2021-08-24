@@ -32,13 +32,7 @@ int main(void)
         }
         //screen.write();
     }
-    std::cout << screen.get_font().dwFontSize.X << " " << screen.get_font().dwFontSize.Y;
-    for (int i = 0; i < 256; i++) {
-        char x = i;
-        std::cout << i << ": "<< x << "\n";
-    }
     return 0;
-
 } 
 
 rect_coord get_rect_cord(int width, int length, coord center) {
