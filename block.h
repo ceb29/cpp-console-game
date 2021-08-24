@@ -17,13 +17,17 @@ class Block {
     rect_coord block;
     WORD attributes;
     DWORD buff_data;
+    coord move_coord;
+    int x_speed;
+    int y_speed;
 
 public:
-    Block(rect_coord, HANDLE);
+    Block(rect_coord, HANDLE, coord);
     void draw_block(void);
     void set_block(void);
     void clear_block(void);
-    rect_coord move_block(int, int);
+    void move_block(void);
+    void wall_bounce(void);
 };
 
 rect_coord create_rect(int, int, int, int);
