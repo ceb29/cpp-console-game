@@ -1,3 +1,6 @@
+#ifndef SCREEN_H
+#define SCREEN_H
+
 #include <windows.h>
 #include "game_timer.h"
 #include "constants.h"
@@ -24,3 +27,5 @@ public:
     void test1(Game_Time);
     void test2(Game_Time);
 };
+
+#endif

@@ -1,6 +1,16 @@
 #include "block.h"
 #include "constants.h"
 
+Block::Block(rect_coord block_coord, HANDLE screen_buff) {
+    screen_buffer = screen_buff;
+    block = block_coord;
+    attributes = FOREGROUND_BLUE | BACKGROUND_RED;
+    buff_data = 0;
+    move_coord = create_coord(0, 0);
+    x_speed = move_coord.x;
+    y_speed = move_coord.y;
+}
+
 Block::Block(rect_coord block_coord, HANDLE screen_buff, coord speed_cord) {
     screen_buffer = screen_buff;
     block = block_coord;

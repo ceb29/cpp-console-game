@@ -1,3 +1,6 @@
+#ifndef GAME_TIMER_H
+#define GAME_TIMER_H
+
 #include <time.h>
 
 class Game_Time {
@@ -11,3 +14,5 @@ public:
     void clear_millis(void);
     void update_time(void);
 };
+
+#endif

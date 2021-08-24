@@ -1,3 +1,6 @@
+#ifndef BLOCK_H
+#define BLOCK_H
+
 #include <windows.h>
 
 struct rect_coord {
@@ -22,6 +25,7 @@ class Block {
     int y_speed;
 
 public:
+    Block(rect_coord, HANDLE);
     Block(rect_coord, HANDLE, coord);
     void draw_block(void);
     void set_block(void);
@@ -32,3 +36,5 @@ public:
 
 rect_coord create_rect(int, int, int, int);
 coord create_coord(int, int);
+
+#endif
