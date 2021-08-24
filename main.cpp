@@ -1,7 +1,6 @@
 #include <iostream>
 #include "screen.h"
 #include "block.h"
-//could move by erase one outer left and top pixels and add outer right and bottom pixels
 rect_coord get_rect_cord(int width, int length, coord center);
 
 int fps = 60;
