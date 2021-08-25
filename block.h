@@ -23,6 +23,9 @@ class Block {
     coord move_coord;
     int x_speed;
     int y_speed;
+    int block_width;
+    int block_height;
+    int change_width;
 
 public:
     Block(rect_coord, HANDLE);
@@ -30,7 +33,14 @@ public:
     void draw_block(void);
     void set_block(void);
     void clear_block(void);
+    void update_coord(void);
     void move_block(void);
+    void clear_pixels_tb(void);
+    void clear_pixels_rl(void);
+    void clear_pixels(void);
+    void add_pixels_tb(void);
+    void add_pixels_rl(void);
+    void add_pixels(void);
     void move_pixels(void);
     void wall_bounce(void);
 };

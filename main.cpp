@@ -1,10 +1,13 @@
 #include <iostream>
 #include "screen.h"
 #include "block.h"
-
+//
+//just use write console for move_pixels 
+//instead of writing text attributes row by row, text attributes can be written as column and row
+//
 rect_coord get_rect_cord(int width, int length, coord center);
 
-int fps = 60;
+int fps = 100;
 int delay = 1000 / fps;
 
 int main(void)
@@ -16,7 +19,7 @@ int main(void)
     Game_Time game_clock(clock());
     unsigned long long past_time = game_clock.get_millis();
     //create a block
-    rect_coord block1_coord = get_rect_cord(15, 15, create_coord(16, 8));
+    rect_coord block1_coord = get_rect_cord(10, 10, create_coord(100, 150));
     coord block1_speed = create_coord(1, 1);
     Block block1(block1_coord, screen.get_handle(), block1_speed);
     block1.set_block();

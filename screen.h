@@ -19,6 +19,7 @@ public:
     ~Screen(void);
     HANDLE get_handle(void);
     void border(void);
+    SMALL_RECT test_write_console_output(SMALL_RECT);
     void start(void);
     void write(void);
     CONSOLE_FONT_INFOEX get_font(void);

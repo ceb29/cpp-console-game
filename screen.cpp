@@ -88,6 +88,25 @@ void Screen::test2(Game_Time g_time) {
     }
 }
 
+SMALL_RECT Screen::test_write_console_output(SMALL_RECT x) {
+    CHAR_INFO char_inf[200];
+    for (int i = 0; i < 200; i++) {
+        char_inf[i].Char.UnicodeChar = L' ';
+        char_inf[i].Attributes = FOREGROUND_BLUE;
+    }
+    WriteConsoleOutput(h_screen_buffer, char_inf, { 20, 10 }, { 0, 0 }, &x);
+    x.Left += 1;
+    x.Right = screen_width;
+    x.Top += 1;
+    x.Bottom = screen_height;
+    for (int i = 0; i < 200; i++) {
+        char_inf[i].Char.UnicodeChar = L' ';
+        char_inf[i].Attributes = BACKGROUND_RED;
+    }
+    WriteConsoleOutput(h_screen_buffer, char_inf, { 20, 10 }, { 0, 0 }, &x);
+    return x;
+}
+
 CONSOLE_FONT_INFOEX Screen::get_font(void) {
     CONSOLE_FONT_INFOEX text_1;
     text_1.cbSize = sizeof(CONSOLE_FONT_INFOEX);
