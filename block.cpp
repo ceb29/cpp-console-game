@@ -27,6 +27,10 @@ Block::Block(rect_coord block_coord, HANDLE screen_buff, coord speed_cord) {
     change_width = block_width;
 }
 
+coord Block::get_move_coord(void) {
+    return move_coord;
+}
+
 void Block::draw_block(void) {
     int x = block.x_end_coord - block.x_start_coord;
     int y = block.y_end_coord - block.y_start_coord;
@@ -215,17 +219,17 @@ void Block::move_pixels(void) {
 }
 
 void Block::wall_bounce(void) {
-    if (block.x_start_coord + x_speed < 1) {
-        move_coord.x = x_speed;
+    if (block.x_start_coord < 0 && move_coord.x < 0) {
+        move_coord.x = -move_coord.x;
     }
-    else if (block.x_end_coord - x_speed > screen_width - 1) {
-        move_coord.x = -x_speed;
+    else if (block.x_end_coord > screen_width && move_coord.x > 0) {
+        move_coord.x = -move_coord.x;
     }
-    else if (block.y_start_coord - y_speed < 1) {
-        move_coord.y = y_speed;
+    else if (block.y_start_coord < 0 && move_coord.y < 0) {
+        move_coord.y = -move_coord.y;
     }
-    else if (block.y_end_coord + y_speed > screen_height - 1) {
-        move_coord.y = -y_speed;
+    else if (block.y_end_coord > screen_height && move_coord.y > 0) {
+        move_coord.y = -move_coord.y;
     };
 }
 

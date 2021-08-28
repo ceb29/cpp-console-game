@@ -25,6 +25,7 @@ public:
     CONSOLE_FONT_INFOEX get_font(void);
     void set_font(void);
     void set_size(void);
+    void print(const char*, int);
     void test1(Game_Time);
     void test2(Game_Time);
 };

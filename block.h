@@ -30,6 +30,7 @@ class Block {
 public:
     Block(rect_coord, HANDLE);
     Block(rect_coord, HANDLE, coord);
+    coord get_move_coord(void);
     void draw_block(void);
     void set_block(void);
     void clear_block(void);

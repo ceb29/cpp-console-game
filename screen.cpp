@@ -47,6 +47,14 @@ void Screen::write(void) {
     WriteConsoleOutputCharacter(h_screen_buffer, char_buffer, screen_mult, buffer_coord, &buffer_data);
 }
 
+void Screen::print(const char* c, int position) {
+    for (int i = 0; i <= sizeof(c); i++) {
+        char_buffer[position] = c[i];
+        write();
+        position++;
+    }
+}
+
 void Screen::test1(Game_Time g_time) {
     if (g_time.get_millis() >= 1) {
         if (char_buffer[buff_ind] != L'-') {
@@ -127,9 +135,9 @@ void Screen::set_font(void) {
 void Screen::set_size(void) {
     SMALL_RECT a;
     a.Left = 0;
-    a.Right = screen_width-1;
+    a.Right = screen_width - 1;
     a.Top = 0;
-    a.Bottom = screen_height-1;
+    a.Bottom = screen_height - 1;
     SetConsoleScreenBufferSize(h_screen_buffer, {screen_width, screen_height});
     SetConsoleWindowInfo(h_screen_buffer, TRUE, &a);
 }

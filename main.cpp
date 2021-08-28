@@ -19,12 +19,16 @@ int main(void)
     Game_Time game_clock(clock());
     unsigned long long past_time = game_clock.get_millis();
     //create a block
-    rect_coord block1_coord = get_rect_cord(10, 10, create_coord(100, 150));
-    coord block1_speed = create_coord(1, 1);
+    rect_coord block1_coord = get_rect_cord(10, 10, create_coord(10, 15));
+    coord block1_speed = create_coord(10, 5);
     Block block1(block1_coord, screen.get_handle(), block1_speed);
+    //start main loop (exit if esc key is pressed)
+    while (GetAsyncKeyState(VK_RETURN) == 0) {
+        //set up screen
+        //press enter when done
+    }
     block1.set_block();
     screen.write();
-    //start main loop (exit if esc key is pressed)
     while (GetAsyncKeyState(VK_ESCAPE) == 0) {
         game_clock.update_time();
         if (game_clock.get_millis() - past_time > delay) {
